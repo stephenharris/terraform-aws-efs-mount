@@ -21,6 +21,9 @@ The following arguments are supported:
 - ``name`` - (Required) An identifier for your file system.
 - ``subnets`` - (Required) A list of subnet ids where mount targets will be created.
 - ``vpc_id`` - (Required) The VPC ID the security groups will be.
+- ``encrypted`` - (Optional) If true, the file system will be encrypted at rest
+- ``kms_key_id`` - The ARN of the key that you wish to use if encrypting at rest. If not supplied, uses service managed encryption. Can be specified only if `encrypted = true`
+- ``tags`` - (Optional) A mapping of tags to apply to resources
 
 ## Attribute Reference
 
