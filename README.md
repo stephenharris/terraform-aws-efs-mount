@@ -1,3 +1,7 @@
+# Forking Reason
+
+This module didn't support any version of terraform over .14 because of usage of the map function. i fixed that.
+
 # AWS EFS terraform module
 
 ## Usage
@@ -18,32 +22,32 @@ You'll then need to add any EC2 instance wanting to access the EFS mount to the 
 
 The following arguments are supported:
 
-- ``name`` - (Required) An identifier for your file system.
-- ``subnets`` - (Required) A list of subnet ids where mount targets will be created.
-- ``vpc_id`` - (Required) The VPC ID the security groups will be.
-- ``encrypted`` - (Optional) If true, the file system will be encrypted at rest
-- ``kms_key_id`` - The ARN of the key that you wish to use if encrypting at rest. If not supplied, uses service managed encryption. Can be specified only if `encrypted = true`
-- ``tags`` - (Optional) A mapping of tags to apply to resources
+- `name` - (Required) An identifier for your file system.
+- `subnets` - (Required) A list of subnet ids where mount targets will be created.
+- `vpc_id` - (Required) The VPC ID the security groups will be.
+- `encrypted` - (Optional) If true, the file system will be encrypted at rest
+- `kms_key_id` - The ARN of the key that you wish to use if encrypting at rest. If not supplied, uses service managed encryption. Can be specified only if `encrypted = true`
+- `tags` - (Optional) A mapping of tags to apply to resources
 
 ## Attribute Reference
 
 The following attributes are exported:
 
-- ``file_system_arn`` - The ARN of the file system (can be used for back-ups, see demo).
-- ``file_system_dns_name`` - The DNS name of the file system.
-- ``ec2_security_group_id`` - The ID of the security group to apply to EC2 instances.
-
+- `file_system_arn` - The ARN of the file system (can be used for back-ups, see demo).
+- `file_system_dns_name` - The DNS name of the file system.
+- `ec2_security_group_id` - The ID of the security group to apply to EC2 instances.
 
 ## Demo
 
 The demo below creates:
 
- - A VPC with two subnets (see networking module)
- - A ssh key pair
- - An EFS and two EFS mounts (see efs_mount module) - the EC2 instances mount onto these in their provisioner. It also creates a security group that should be assigned to any EC2 instances wanting to mount onto the EFS.
- - Two EC2 instances, one in each subnet (using the above key pair)
- - A security group that allows SSH access to do the provisioning
- - For backups, a vault, a plan and a resource selection (the created EFS), along with the required IAM policies
+- A VPC with two subnets (see networking module)
+- A ssh key pair
+- An EFS and two EFS mounts (see efs_mount module) - the EC2 instances mount onto these in their provisioner. It also creates a security group that should be assigned to any EC2 instances wanting to mount onto the EFS.
+- Two EC2 instances, one in each subnet (using the above key pair)
+- A security group that allows SSH access to do the provisioning
+- For backups, a vault, a plan and a resource selection (the created EFS), along with the required IAM policies
+
 ```
 provider "aws" {
   region  = "eu-west-1"
@@ -66,7 +70,7 @@ module "efs_mount" {
   vpc_id  = module.networking.vpc_id
 }
 
-# Demo, create two EC2 instances with SSH access and a key-pair to access them 
+# Demo, create two EC2 instances with SSH access and a key-pair to access them
 resource "tls_private_key" "tmp" {
   algorithm   = "RSA"
 }
