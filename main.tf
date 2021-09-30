@@ -10,9 +10,9 @@ resource "aws_efs_file_system" "this" {
   kms_key_id = var.kms_key_id
 
   tags = merge(
-    map("Name", var.name),
-    map("CreationToken", random_id.creation_token.hex),
-    map("terraform", "true"),
+    tomap({ Name = var.name }),
+    tomap({ CreationToken = random_id.creation_token.hex }),
+    tomap({ terraform = "true" }),
     var.tags,
   )
 }
@@ -33,8 +33,8 @@ resource "aws_security_group" "mount_target_client" {
   depends_on = [aws_efs_mount_target.this]
 
   tags = merge(
-    map("Name", "${var.name}-mount-target-client"),
-    map("terraform", "true"),
+    tomap({ Name = "${var.name}-mount-target-client" }),
+    tomap({ terraform = "true" }),
     var.tags,
   )
 }
@@ -55,8 +55,8 @@ resource "aws_security_group" "mount_target" {
   vpc_id      = var.vpc_id
 
   tags = merge(
-    map("Name", "${var.name}-mount-target"),
-    map("terraform", "true"),
+    tomap({ Name = "${var.name}-mount-target" }),
+    tomap({ terraform = "true" }),
     var.tags,
   )
 }
