@@ -4,7 +4,7 @@ variable "name" {
 }
 
 variable "subnets" {
-  type        = list
+  type        = list(any)
   description = "(Required) A list of subnet ids where mount targets will be."
 }
 
@@ -18,7 +18,6 @@ variable "encrypted" {
   default     = false
   type        = bool
 }
-
 
 variable "kms_key_id" {
   type        = string
