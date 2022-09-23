@@ -4,7 +4,7 @@ variable "name" {
 }
 
 variable "subnets" {
-  type        = list(any)
+  type        = list(string)
   description = "(Required) A list of subnet ids where mount targets will be."
 }
 
