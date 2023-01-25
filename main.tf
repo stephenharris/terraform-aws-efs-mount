@@ -9,7 +9,7 @@ resource "aws_efs_file_system" "this" {
   encrypted  = var.encrypted
   kms_key_id = var.kms_key_id
 
-  tags = merge({Name = ${var.name}, CreationToken = ${random_id.creation_token.hex}, terraform = true}, var.tags)
+  tags = merge({Name = "${var.name}", CreationToken = "${random_id.creation_token.hex}", terraform = true}, var.tags)
 }
 
 resource "aws_efs_mount_target" "this" {
