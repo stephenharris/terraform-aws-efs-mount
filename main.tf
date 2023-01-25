@@ -10,9 +10,11 @@ resource "aws_efs_file_system" "this" {
   kms_key_id = var.kms_key_id
 
   tags = merge(
-    map("Name", var.name),
-    map("CreationToken", random_id.creation_token.hex),
-    map("terraform", "true"),
+    {
+      Name = $(var.name),
+      CreationToken = $(random_id.creation_token.hex),
+      terraform = true
+    },
     var.tags,
   )
 }
