@@ -26,6 +26,12 @@ variable "kms_key_id" {
   default     = ""
 }
 
+variable "cidr_blocks" {
+  type        = list
+  description = "(Optional) A list of CIDR blocks to be allowed access to the mount points"
+  default     = ""
+}
+
 variable "tags" {
   description = "A mapping of tags to apply to resources"
   type        = map(string)
