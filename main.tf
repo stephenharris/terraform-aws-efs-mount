@@ -11,8 +11,8 @@ resource "aws_efs_file_system" "this" {
 
   tags = merge(
     {
-      Name = $(var.name),
-      CreationToken = $(random_id.creation_token.hex),
+      Name = ${var.name},
+      CreationToken = ${random_id.creation_token.hex},
       terraform = true
     },
     var.tags,
