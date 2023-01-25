@@ -9,7 +9,7 @@ resource "aws_efs_file_system" "this" {
   encrypted  = var.encrypted
   kms_key_id = var.kms_key_id
   
-  throughput_mode = "elastic"
+  throughput_mode = var.throughput_mode
 
   tags = merge({Name = "${var.name}", CreationToken = "${random_id.creation_token.hex}", terraform = true}, var.tags)
 }
@@ -46,6 +46,7 @@ resource "aws_security_group_rule" "nfs_egress" {
   protocol                 = "tcp"
   security_group_id        = aws_security_group.mount_target_client.id
   source_security_group_id = aws_security_group.mount_target.id
+  cidr_blocks              = var.cidr_blocks
 }
 
 resource "aws_security_group" "mount_target" {
@@ -69,5 +70,6 @@ resource "aws_security_group_rule" "nfs_ingress" {
   to_port                  = 2049
   protocol                 = "tcp"
   security_group_id        = aws_security_group.mount_target.id
-  source_security_group_id = aws_security_group.mount_target_client.id
+  source_security_group_id = var.cidr_blocks == [] ? aws_security_group.mount_target_client.id : null
+  cidr_blocks              = var.cidr_blocks == [] ? null: var.cidr_blocks
 }
