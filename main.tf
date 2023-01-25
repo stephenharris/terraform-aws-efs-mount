@@ -28,8 +28,10 @@ resource "aws_security_group" "mount_target_client" {
   depends_on = [aws_efs_mount_target.this]
 
   tags = merge(
-    map("Name", "${var.name}-mount-target-client"),
-    map("terraform", "true"),
+    {
+      Name = "${var.name}-mount-target-client",
+      terraform = true
+    },
     var.tags,
   )
 }
@@ -50,9 +52,11 @@ resource "aws_security_group" "mount_target" {
   vpc_id      = var.vpc_id
 
   tags = merge(
-    map("Name", "${var.name}-mount-target"),
-    map("terraform", "true"),
-    var.tags,
+    {
+      Name = "${var.name}-mount-target",
+      terraform = true
+    },
+    var.tags
   )
 }
 
