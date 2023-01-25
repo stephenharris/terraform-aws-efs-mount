@@ -26,10 +26,16 @@ variable "kms_key_id" {
   default     = ""
 }
 
+variable "throughput_mode" {
+  type        = string
+  description = "thoughput mode"
+  default     = "bursting"
+}
+
 variable "cidr_blocks" {
   type        = list
   description = "(Optional) A list of CIDR blocks to be allowed access to the mount points"
-  default     = ""
+  default     = []
 }
 
 variable "tags" {
