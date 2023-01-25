@@ -8,6 +8,8 @@ resource "aws_efs_file_system" "this" {
 
   encrypted  = var.encrypted
   kms_key_id = var.kms_key_id
+  
+  throughput_mode = "elastic"
 
   tags = merge({Name = "${var.name}", CreationToken = "${random_id.creation_token.hex}", terraform = true}, var.tags)
 }
