@@ -46,7 +46,6 @@ resource "aws_security_group_rule" "nfs_egress" {
   protocol                 = "tcp"
   security_group_id        = aws_security_group.mount_target_client.id
   source_security_group_id = aws_security_group.mount_target.id
-  cidr_blocks              = var.cidr_blocks
 }
 
 resource "aws_security_group" "mount_target" {
