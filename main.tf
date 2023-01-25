@@ -10,7 +10,11 @@ resource "aws_efs_file_system" "this" {
   kms_key_id = var.kms_key_id
   
   throughput_mode = var.throughput_mode
-
+  
+  lifecycle_policy {
+    transition_to_ia = var.transition_to_ia == "" ? null : var.transition_to_ia
+  }
+  
   tags = merge({Name = "${var.name}", CreationToken = "${random_id.creation_token.hex}", terraform = true}, var.tags)
 }
 
