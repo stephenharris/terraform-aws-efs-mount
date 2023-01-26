@@ -13,6 +13,7 @@ resource "aws_efs_file_system" "this" {
   
   lifecycle_policy {
     transition_to_ia = var.transition_to_ia == "" ? null : var.transition_to_ia
+    transition_to_primary_storage_class = "AFTER_1_ACCESS"
   }
   
   tags = merge({Name = "${var.name}", CreationToken = "${random_id.creation_token.hex}", terraform = true}, var.tags)
