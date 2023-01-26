@@ -13,6 +13,9 @@ resource "aws_efs_file_system" "this" {
   
   lifecycle_policy {
     transition_to_ia = var.transition_to_ia == "" ? null : var.transition_to_ia
+  }
+
+  lifecycle_policy {
     transition_to_primary_storage_class = var.transition_to_ia == "" ? null : "AFTER_1_ACCESS"
   }
   
