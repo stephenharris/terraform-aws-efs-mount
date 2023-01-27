@@ -4,7 +4,7 @@
 
 ```
 module "efs_mount" {
-  source = "github.com/stephenharris/terraform-aws-efs-mount"
+  source = "<BASE_REPO>/releases/download/<tag_name>/terraform-aws-efs-mount.zip"
 
   name    = "my-efs-mount"
   subnets = ["subnet-1234abcd", "subnet-5678efgh"]
@@ -32,6 +32,7 @@ The following attributes are exported:
 - ``file_system_arn`` - The ARN of the file system (can be used for back-ups, see demo).
 - ``file_system_dns_name`` - The DNS name of the file system.
 - ``ec2_security_group_id`` - The ID of the security group to apply to EC2 instances.
+- ``mount_target_ids`` - The mount target ids
 
 
 ## Demo
