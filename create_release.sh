@@ -4,7 +4,7 @@ export VERSION=$1
 export RELEASE_NAME=`basename $GITHUB_REPO`
 
 # Get release url
-export RELEASE_URL=$(curl -H  "Authorization: token $SECRET_TOKEN" https://api.github.com/repos/$GITHUB_REPO/releases/tags/$VERSION)
+export RELEASE_URL=$(curl -H  "Authorization: token $SECRET_TOKEN" https://api.github.com/repos/$GITHUB_REPO/releases/tags/$VERSION | grep \"url\" | grep releases | sed -e 's/.*\(https.*\)\"\,/\1/' | sed -e 's/api/uploads/')
 
 # Build TF modules that require source building
 function create_zip_file() {
